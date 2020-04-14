@@ -19,8 +19,8 @@ public class LogAnalyzer
         // Create the array object to hold the hourly
         // access counts.
         hourCounts = new int[24];
-        dayCounts = new int[28];
-        monthCounts = new int[12]; 
+        dayCounts = new int[29];
+        monthCounts = new int[13]; 
         
         // Create the reader to obtain the data.
         reader = new LogfileReader(filename);
@@ -39,6 +39,8 @@ public class LogAnalyzer
             hourCounts[hour]++;
             int day = entry.getDay();
             dayCounts[day]++;
+            int month = entry.getMonth();
+            monthCounts[month]++; 
         }
     }
     /**
@@ -80,37 +82,19 @@ public class LogAnalyzer
             System.out.println(day + ": " + dayCounts[day]);
         }
     }
-    
-    
-   /**
-    * @return busiest hour
-    * 
-    */
-       public int busiestHour()
+    /**
+     * 
+     */
+    public void printMonthCounts()
     {
-            int numberOfAccesses = 0;
-            int busiestHour = 0;
-            int i = 0;
-            
-            while(i  < hourCounts.length)
-            {
-                if(numberOfAccesses < hourCounts[i])
-                {
-                    busiestHour = i; 
-                    numberOfAccesses = hourCounts[i];
-                    i ++;
-                    
-                }
-                else {
-                i++;
-                
-                }
-                
-            
-    }
-    return busiestHour; 
+        analyzeData(); 
+        System.out.println("Month: Count");
+        for(int month = 0; month < monthCounts.length; month++) {
+            System.out.println(month + ": " + monthCounts[month]);
+        }
     }
     
+   
     /**
      * @return second busiest hours
      */
@@ -155,6 +139,131 @@ public class LogAnalyzer
             }
             return quietestHour;
     }
+    
+     /**
+     * 
+     */
+    public int quietestDay()
+    {
+            int numAccessesAtQuietest = numberOfAccesses();
+            int quietestDay = 0;
+            int i = 0;
+            
+            while(i < dayCounts.length - 1){
+                if (numAccessesAtQuietest > dayCounts[i]){
+                    quietestDay = i;
+                    numAccessesAtQuietest = dayCounts[i];
+                    i++;
+                }
+                else {
+                    i++;
+                }
+            }
+            return quietestDay;
+    }
+    
+      public int quietestMonth()
+    {
+            int numAccessesAtQuietest = numberOfAccesses();
+            int quietestMonth = 0;
+            int i = 0;
+            
+            while(i < monthCounts.length - 1){
+                if (numAccessesAtQuietest > monthCounts[i]){
+                    quietestMonth = i;
+                    numAccessesAtQuietest = monthCounts[i];
+                    i++;
+                }
+                else {
+                    i++;
+                }
+            }
+            return quietestMonth;
+    }
+    
+    public int busiestDay()
+    {
+            int numberOfAccesses = 0;
+            int busiestDay = 0;
+            int i = 0;
+            
+            while(i  < dayCounts.length)
+            {
+                if(numberOfAccesses < dayCounts[i])
+                {
+                    busiestDay = i; 
+                    numberOfAccesses = dayCounts[i];
+                    i ++;
+                    
+                }
+                else {
+                i++;
+                
+                }
+                
+            
+    }
+    return busiestDay; 
+    }
+    
+    /**
+    * @return busiest hour
+    * 
+    */
+       public int busiestHour()
+    {
+            int numberOfAccesses = 0;
+            int busiestHour = 0;
+            int i = 0;
+            
+            while(i  < hourCounts.length)
+            {
+                if(numberOfAccesses < hourCounts[i])
+                {
+                    busiestHour = i; 
+                    numberOfAccesses = hourCounts[i];
+                    i ++;
+                    
+                }
+                else {
+                i++;
+                
+                }
+                
+            
+    }
+    return busiestHour; 
+    }
+    
+    /**
+    * @return busiest hour
+    * 
+    */
+       public int busiestMonth()
+    {
+            int numberOfAccesses = 0;
+            int busiestMonth = 0;
+            int i = 0;
+            
+            while(i  < monthCounts.length)
+            {
+                if(numberOfAccesses < monthCounts[i])
+                {
+                    busiestMonth = i; 
+                    numberOfAccesses = monthCounts[i];
+                    i ++;
+                    
+                }
+                else {
+                i++;
+                
+                }
+                
+            
+    }
+    return busiestMonth; 
+    }
+    
     
     /**
      * 
