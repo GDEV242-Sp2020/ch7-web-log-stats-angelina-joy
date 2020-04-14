@@ -19,7 +19,7 @@ public class LogAnalyzer
         // Create the array object to hold the hourly
         // access counts.
         hourCounts = new int[24];
-        dayCounts = new int[31];
+        dayCounts = new int[28];
         monthCounts = new int[12]; 
         
         // Create the reader to obtain the data.
@@ -38,6 +38,17 @@ public class LogAnalyzer
         }
     }
     
+    /**
+     * 
+     */
+    public void analyzeDailyData()
+    {
+         while(reader.hasNext()) {
+            LogEntry entry = reader.next();
+            int day = entry.getDay();
+            dayCounts[day]++;
+        }
+    }
     
     /**
      * 7.14 numberOfAccesses method
