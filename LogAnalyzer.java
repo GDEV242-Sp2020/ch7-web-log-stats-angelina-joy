@@ -78,6 +78,18 @@ public class LogAnalyzer
             System.out.println(hour + ": " + hourCounts[hour]);
         }
     }
+    /**
+     * 
+     */
+    public void printDailyCounts()
+    {
+        analyzeDailyData(); 
+        System.out.println("Day: Count");
+        for(int day = 0; day < dayCounts.length; day++) {
+            System.out.println(day + ": " + dayCounts[day]);
+        }
+    }
+    
     
    /**
     * @return busiest hour
