@@ -26,30 +26,21 @@ public class LogAnalyzer
         reader = new LogfileReader(filename);
     }
 
-    /**
-     * Analyze the hourly access data from the log file.
-     */
-    public void analyzeHourlyData()
-    {
-        while(reader.hasNext()) {
-            LogEntry entry = reader.next();
-            int hour = entry.getHour();
-            hourCounts[hour]++;
-        }
-    }
+   
     
     /**
      * 
      */
-    public void analyzeDailyData()
+   public void analyzeData()
     {
          while(reader.hasNext()) {
             LogEntry entry = reader.next();
+            int hour = entry.getHour();
+            hourCounts[hour]++;
             int day = entry.getDay();
             dayCounts[day]++;
         }
     }
-    
     /**
      * 7.14 numberOfAccesses method
      * @returns total
@@ -72,7 +63,7 @@ public class LogAnalyzer
      */
     public void printHourlyCounts()
     {
-        analyzeHourlyData(); 
+        analyzeData(); 
         System.out.println("Hr: Count");
         for(int hour = 0; hour < hourCounts.length; hour++) {
             System.out.println(hour + ": " + hourCounts[hour]);
@@ -83,7 +74,7 @@ public class LogAnalyzer
      */
     public void printDailyCounts()
     {
-        analyzeDailyData(); 
+        analyzeData(); 
         System.out.println("Day: Count");
         for(int day = 0; day < dayCounts.length; day++) {
             System.out.println(day + ": " + dayCounts[day]);
